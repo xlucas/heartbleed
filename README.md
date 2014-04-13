@@ -31,7 +31,7 @@ Server gmail.com:443 seems safe
 If the remote host is vulnerable, the ouput will display about 16 Kib of data (Heartbeat message maximum size without max_fragment_length extension, see *RFC 6520*) stolen from the remote host memory and shown as an hexadecimal dump. The output will look like this :
 
 <pre>
-Server wannonce.com:443 is vulnerable! Heartbeat payload :
+Server myserver.com:443 is vulnerable! Heartbeat payload :
 00000000  d4 03 03 53 4a 84 a9 00 01 02 03 04 05 06 07 08  |...SJ...........|
 00000010  09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18  |................|
 00000020  19 1a 1b 00 01 a6 00 00 00 01 00 02 00 03 00 04  |................|
