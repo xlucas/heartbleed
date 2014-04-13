@@ -28,7 +28,7 @@ If the remote host seems not vulnerable, the ouptut will be :
 Server gmail.com:443 seems safe
 </pre>
 
-If the remote host is vulnerable, the ouput will a maximum of ~ 16 Kib of data (Heartbeat message maximum size without max_fragment_length extension, see *RFC 6520*). The output will look like this :
+If the remote host is vulnerable, the ouput will display about 16 Kib of data (Heartbeat message maximum size without max_fragment_length extension, see *RFC 6520*) as an hexadecimal dump. The output will look like this :
 
 <pre>
 Server wannonce.com:443 is vulnerable! Heartbeat payload :
