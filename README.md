@@ -1,11 +1,11 @@
 heartbleed-tester
 =================
 
-A simple tool written with ruby designed to test for OpenSSL CVE-2014-0160 vulnerability.
+A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE-2014-0160 vulnerability.
 
 ## Disclaimer
 
-**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages, and is shared as a tool for sysadmins.**
+**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages. It is shared as a tool for sysadmins.**
 
 ## Dependencies
 
