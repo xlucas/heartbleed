@@ -1,11 +1,11 @@
 heartbleed-tester
 =================
 
-A simple tool written with ruby designed to test for OpenSSL CVE-2014-0160 vulnerability.
+A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE-2014-0160 vulnerability.
 
 ## Disclaimer
 
-**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages, and is shared as a tool for sysadmins.**
+**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages. It is shared as a tool for internal security auditing.**
 
 ## Dependencies
 
@@ -15,7 +15,7 @@ Requires :
 - Bundler
 
 In order to install these prerequites, first download and install ruby for your plateform.
-To install Bundler, run ```gem install bundler ```. Then, to retrieve project dependencies, run ```bundle install```.
+To install Bundler, run ```gem install bundler ```. Then, to retrieve project dependencies, run ```bundle install``` in the project root directory.
 
 
 ## Usage
@@ -28,7 +28,7 @@ If the remote host seems not vulnerable, the ouptut will be :
 Server gmail.com:443 seems safe
 </pre>
 
-If the remote host is vulnerable, the ouput will a maximum of ~ 16 Kib of data (Heartbeat message maximum size without max_fragment_length extension, see *RFC 6520*). The output will look like this :
+If the remote host is vulnerable, the ouput will display about 16 Kib of data (Heartbeat message maximum size without max_fragment_length extension, see *RFC 6520*) stolen from the remote host memory and shown as an hexadecimal dump. The output will look like this :
 
 <pre>
 Server wannonce.com:443 is vulnerable! Heartbeat payload :
