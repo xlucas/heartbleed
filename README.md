@@ -5,7 +5,7 @@ A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE
 
 ## Disclaimer
 
-**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages. It is shared as a tool for sysadmins.**
+**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages. It is shared as a tool for internal security auditing.**
 
 ## Dependencies
 
