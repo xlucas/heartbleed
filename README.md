@@ -15,7 +15,7 @@ Requires :
 - Bundler
 
 In order to install these prerequites, first download and install ruby for your plateform.
-To install Bundler, run ```gem install bundler ```. Then, to retrieve project dependencies, run ```bundle install```.
+To install Bundler, run ```gem install bundler ```. Then, to retrieve project dependencies, run ```bundle install``` in the project root directory.
 
 
 ## Usage
