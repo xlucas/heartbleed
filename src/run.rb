@@ -5,9 +5,10 @@
 # ******************************************************************************
 # This script will try to steal ~ 16Kib from the remote server memory and
 # display data content if successful. It will send a ClientHello message with a
-# very complete cipher suite list. The only TLS extension in used is the
-# Heartbeat extension. It expects one or two parameters from the command line :
-# remote host and port. Port 443 is assumed if not specified.
+# very complete cipher suite list. The only TLS extension used is the Heartbeat
+# extension.
+# It expects one or two parameters from the command line : remote host and port.
+# Port 443 is assumed if not specified.
 # ******************************************************************************
 # @author : Xavier LUCAS
 # @date   : 08/04/2014
@@ -351,7 +352,7 @@ def is_vulnerable?(host, port = 443)
   # Send ClientHello message
   s.write(TLS_HANDSHAKE)
 
-  # Foolishly Wait for ServerHelloDone message
+  # Foolishly wait for ServerHelloDone message
   while true
     if (read_tls_header_type(s) == 22) and (read_tls_handshake_type(s) == 14)
       break
