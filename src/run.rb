@@ -4,8 +4,10 @@
 # OpenSSL CVE-2014-0160 ("Heartbleed") vulnerability check over TLS 1.2
 # ******************************************************************************
 # This script will try to steal ~ 16Kib from the remote server memory and
-# display data content if successful. It expects one or two parameters from
-# the command line : remote host and port. Port 443 is assumed if not specified.
+# display data content if successful. It will send a ClientHello message with a
+# very complete cipher suite list. The only TLS extension in used is the
+# Heartbeat extension. It expects one or two parameters from the command line :
+# remote host and port. Port 443 is assumed if not specified.
 # ******************************************************************************
 # @author : Xavier LUCAS
 # @date   : 08/04/2014
@@ -369,7 +371,7 @@ def is_vulnerable?(host, port = 443)
         break
       end
     else
-      puts "Server #{host}:#{port} seems safe"
+      puts "Host #{host}:#{port} seems safe"
       break
     end
   end
@@ -382,7 +384,6 @@ end
 # Run
 # ------------------------------------------------------------------------------
 
-# Run the test
 if ARGV[1].nil?
   is_vulnerable?(ARGV[0])
 else
