@@ -310,7 +310,7 @@ TLS_HANDSHAKE_PROTOCOL = [
 
 TLS_HEARTBEAT_PROTOCOL = [
   0x01,
-  0x40, 0x00
+  0x3F, 0xFD
 ]
 
 # Assemble header and protocol data
@@ -342,7 +342,7 @@ end
 def read_tls_heartbeat_data (socket)
   heartbeat = socket.read(3)
   ht_type, ht_length = heartbeat.unpack('Cn')
-  ht_data = socket.read(ht_length-3)
+  ht_data = socket.read(ht_length)
   return ht_data
 end
 
