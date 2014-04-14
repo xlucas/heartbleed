@@ -5,7 +5,7 @@ A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE
 
 ## Disclaimer
 
-**NOTE : I will not be responsible for the damage done with this tool. It was written to check private servers for this specific vulnerability and measure potential user-related data leakages. It is shared as a tool for internal security auditing.**
+**NOTE : I will not be responsible for the damage that could be done using this tool. It was written to check private servers for a precise vulnerability and measure potential user-related data leakages under high traffic. It is shared as a tool for internal security auditing.**
 
 ## Dependencies
 
@@ -14,21 +14,22 @@ Requires :
 - Ruby
 - Bundler
 
-In order to install these prerequites, first download and install ruby for your plateform.
-To install Bundler, run ```gem install bundler ```. Then, to retrieve project dependencies, run ```bundle install``` in the project root directory.
+In order to install these prerequisites, first download and install ruby for your plateform.
+Then install Bundler, with the command ```gem install bundler ``` and retrieve project dependencies by running ```bundle install``` in the project root directory.
 
 
 ## Usage
 
-The command line call looks like this ```ruby src/run.rb <host> <port>```
+The command line synopsis is ```ruby src/run.rb <host> [<port>]```
 
-If the remote host seems not vulnerable, the ouptut will be :
+If the remote host does not appear to be vulnerable, the ouptut will look like this :
 
 <pre>
 Host server:443 seems safe
 </pre>
 
-If the remote host is vulnerable, the ouput will display about 16 Kib of data (Heartbeat message maximum size without max_fragment_length extension, see *RFC 6520*) stolen from the remote host memory and shown as an hexadecimal dump. The output will look like this :
+If the remote host is vulnerable, the ouput will display about 16 Kib of data stolen from memory and shown as an hexadecimal dump. 
+Note : 16 Kib is the maximum size for one Heartbeat message without using *max_fragment_length* extension, see [RFC 6520](https://tools.ietf.org/html/rfc6520).
 
 <pre>
 Host server:443 is vulnerable! Heartbeat payload :
@@ -44,5 +45,12 @@ Host server:443 is vulnerable! Heartbeat payload :
 ....
 </pre>
 
+
+## Improvement
+
+This tool may be improved in future versions with things like :
+- Command line argument checking
+- Support for more complex cases
+- Better timeout management
 
 
