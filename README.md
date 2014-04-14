@@ -1,4 +1,4 @@
-heartbleed-tester
+heartbleed-test
 =================
 
 A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE-2014-0160 vulnerability.
