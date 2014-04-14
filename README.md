@@ -5,7 +5,7 @@ A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE
 
 ## Disclaimer
 
-**NOTE : I will not be responsible for the damage that could be done using this tool. It was written to check private servers for a precise vulnerability and measure potential user-related data leakages under high traffic. It is shared as a tool for internal security auditing.**
+**I will not be taken responsible for the damage that could be done using this tool. It was written to check private servers for a precise vulnerability and measure potential user-related data leakages under high traffic. It is shared as a tool for internal security auditing.**
 
 ## Dependencies
 
@@ -29,10 +29,11 @@ Host server:443 seems safe
 </pre>
 
 If the remote host is vulnerable, the ouput will display about 16 Kib of data stolen from memory and shown as an hexadecimal dump. 
+
 Note : 16 Kib is the maximum size for one Heartbeat message without using *max_fragment_length* extension, see [RFC 6520](https://tools.ietf.org/html/rfc6520).
 
 <pre>
-Host server:443 is vulnerable! Heartbeat payload :
+Host server:443 is vulnerable! Heartbeat response payload :
 00000000  d4 03 03 53 4a 84 a9 00 01 02 03 04 05 06 07 08  |...SJ...........|
 00000010  09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18  |................|
 00000020  19 1a 1b 00 01 a6 00 00 00 01 00 02 00 03 00 04  |................|
