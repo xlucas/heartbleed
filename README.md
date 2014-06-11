@@ -28,9 +28,9 @@ If the remote host does not appear to be vulnerable, the ouptut will look like t
 Host server:443 seems safe
 </pre>
 
-If the remote host is vulnerable, the ouput will display about 16 Kib of data stolen from memory and shown as an hexadecimal dump. 
+If the remote host is vulnerable, the ouput will display about 64 Kib of data stolen from memory and shown as an hexadecimal dump.
 
-Note : 16 Kib is the maximum size for one Heartbeat message without using *max_fragment_length* extension, see [RFC 6520](https://tools.ietf.org/html/rfc6520).
+Confusions about stolen chunks size : the maximum Heartbeat message size without using *max_fragment_length* extension per [RFC 6520](https://tools.ietf.org/html/rfc6520) is 2^14 bytes. This means, if OpenSSL was respecting this part of the RFC, the actual maximum chunk size of stolen data should have been about 16Kib. However, OpenSSL does not even respect this constraint, allowing to steal chunks of 65535 bytes.
 
 <pre>
 Host server:443 is vulnerable! Heartbeat response payload :
