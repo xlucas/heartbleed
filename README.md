@@ -28,9 +28,7 @@ If the remote host does not appear to be vulnerable, the ouptut will look like t
 Host server:443 seems safe
 </pre>
 
-If the remote host is vulnerable, the ouput will display about 64 Kib of data stolen from memory and shown as an hexadecimal dump.
-
-Confusions about stolen chunks size : the maximum Heartbeat message size without using *max_fragment_length* extension per [RFC 6520](https://tools.ietf.org/html/rfc6520) is ![equation](http://latex.codecogs.com/gif.latex?2^{14}) bytes. This means, if OpenSSL was respecting this part of the RFC, the actual maximum chunk size of stolen data should have been about 16 Kib. However, OpenSSL doesn't, allowing to steal chunks of ![equation](http://latex.codecogs.com/gif.latex?2^{16}-1) bytes.
+By contrast if the remote host is vulnerable, the ouput will display about 64 Kib of data stolen from memory and shown as a hexadecimal dump.
 
 <pre>
 Host server:443 is vulnerable! Heartbeat response payload :
@@ -46,6 +44,25 @@ Host server:443 is vulnerable! Heartbeat response payload :
 ....
 </pre>
 
+#### Note about stolen chunks size
+
+Per RFCs [6520](https://tools.ietf.org/html/rfc6520#section-4) and [6066](https://tools.ietf.org/html/rfc6066#section-4), the maximum Heartbeat message size should be either ![equation](http://latex.codecogs.com/gif.latex?2^{9}), ![equation](http://latex.codecogs.com/gif.latex?2^{10}), ![equation](http://latex.codecogs.com/gif.latex?2^{11}), ![equation](http://latex.codecogs.com/gif.latex?2^{12}) or ![equation](http://latex.codecogs.com/gif.latex?2^{14}) bytes depending on the use of the Maximum Fragment Length extension or not.
+
+Quoting RFC 6520 :
+>The total length of a HeartbeatMessage MUST NOT exceed 2^14 or max_fragment_length when negotiated as defined in RFC 6066.
+
+Quoting RFC 6066 :
+>The "extension_data" field of this extension SHALL contain:
+
+>     enum{
+>          2^9(1), 2^10(2), 2^11(3), 2^12(4), (255)
+>      } MaxFragmentLength;
+
+>   whose value is the desired maximum fragment length.  The allowed
+>   values for this field are: 2^9, 2^10, 2^11, and 2^12.
+
+
+This means, the maximum chunk size of stolen data should be about 16 Kib. However, OpenSSL does not honor this constraint, allowing to use the Heartbeat message payload length field maximum value i.e. 65535 (0xFFFF).
 
 ## Improvement
 
