@@ -63,12 +63,3 @@ Quoting RFC 6066 :
 
 
 This means, the maximum chunk size of stolen data should be about 16 Kib. However, OpenSSL does not honor this constraint, allowing to use the Heartbeat message payload length field maximum value i.e. 65535 (0xFFFF).
-
-## Improvement
-
-This tool may be improved in future versions with things like :
-- Command line argument checking
-- Support for more complex cases
-- Better timeout management
-
-
