@@ -1,7 +1,7 @@
 heartbleed
 ==========
 
-A simple tool written in Ruby wich allow testing a remote server for OpenSSL CVE-2014-0160 vulnerability.
+A simple tool written in Ruby wich allow testing a server for OpenSSL CVE-2014-0160 vulnerability.
 
 ## Disclaimer
 
@@ -22,13 +22,13 @@ Then install Bundler, with the command ```gem install bundler ``` and retrieve p
 
 The command line synopsis is ```ruby src/run.rb <host> [<port>]```
 
-If the remote host does not appear to be vulnerable, the ouptut will look like this :
+If your server does not appear to be vulnerable, the ouptut will look like this :
 
 <pre>
 Host server:443 seems safe
 </pre>
 
-By contrast if the remote host is vulnerable, the ouput will display about 64 Kib of data stolen from memory and shown as a hexadecimal dump.
+By contrast if it is vulnerable, the ouput will display about 64 Kib of data stolen from memory and shown as a hexadecimal dump so you can check if sensible information disclosure could have happened or not.
 
 <pre>
 Host server:443 is vulnerable! Heartbeat response payload :
