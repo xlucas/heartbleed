@@ -1,7 +1,7 @@
 heartbleed
 ==========
 
-A simple tool written in Ruby wich allow testing a server for OpenSSL CVE-2014-0160 vulnerability.
+A simple tool written in Ruby wich allow testing your servers for OpenSSL CVE-2014-0160 vulnerability.
 
 ## Disclaimer
 
